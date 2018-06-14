@@ -1,3 +1,6 @@
+/*
+使用mysql++连接数据库，将识别结果写入数据库，供后台及前端调用
+*/
 #include <iostream>  
 #include <sstream>  
 #include <memory>  
