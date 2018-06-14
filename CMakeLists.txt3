@@ -1,0 +1,24 @@
+cmake_minimum_required(VERSION 2.8)  
+project(baidu)  
+set(OpenCV_DIR "/app/opencv-3.3.0")
+SET(CMAKE_C_COMPILER g++)
+SET(CMAK_CXX_COMPILER g++)
+add_compile_options(-std=c++11)
+add_compile_options(-m64)
+
+include_directories(
+    ${baidu_SOURCE_DIR}/include/)
+link_directories(
+    ${baidu_SOURCE_DIR}/lib/)
+
+add_executable(baidu test.cpp get_token.cpp base64.cpp)  
+find_package(OpenCV REQUIRED)
+target_link_libraries(    
+    baidu
+    -ljson
+    -lcurl
+    -lopencv_core
+    -lopencv_highgui
+    -lopencv_imgproc
+    -lopencv_imgcodecs
+    ${OpenCV_LIBS}) 
