@@ -1,3 +1,7 @@
+/*
+鍒╃敤鐧惧害浜鸿劯璇嗗埆api璇嗗埆鍥句腑鐨勪汉鑴革紝鏄剧ず璇嗗埆缁撴灉
+*/
+
 #include "get_token.h"
 
 //std::string access_token_result;
@@ -5,12 +9,12 @@ std::string add_result;
 std::string search_result;
 
 static size_t callback(void *ptr, size_t size, size_t nmemb, void *stream) {
-	// 获取到的body存放在ptr中，先将其转换为string格式
+	// 鑾峰彇鍒扮殑body瀛樻斁鍦╬tr涓紝鍏堝皢鍏惰浆鎹负string鏍煎紡
 	string s((char *)ptr, size * nmemb);
-	// 开始获取json中的access token项目
+	// 寮�濮嬭幏鍙杍son涓殑access token椤圭洰
 	Json::Reader reader;
 	Json::Value root;
-	// 使用boost库解析json
+	// 浣跨敤boost搴撹В鏋恓son
 	reader.parse(s, root);
 	std::string* access_token_result = static_cast<string*>(stream);
 	*access_token_result = root["access_token"].asString();
@@ -49,7 +53,7 @@ int get_access_token(string &access_token, const string &AK, const string &SK) {
 }
 
 static size_t callback_add(void *ptr, size_t size, size_t nmemb, void *stream) {
-	// 获取到的body存放在ptr中，先将其转换为string格式
+	// 鑾峰彇鍒扮殑body瀛樻斁鍦╬tr涓紝鍏堝皢鍏惰浆鎹负string鏍煎紡
 	std::string s((char *)ptr, size * nmemb);
 	add_result = std::string((char *)ptr, size * nmemb);
 	Json::Reader reader;
@@ -100,7 +104,7 @@ int add(const string & base64string, std::string &json_string,std::string &json_
 }
 
 static size_t callback_search(void *ptr, size_t size, size_t nmemb, void *stream) {
-	// 获取到的body存放在ptr中，先将其转换为string格式
+	// 鑾峰彇鍒扮殑body瀛樻斁鍦╬tr涓紝鍏堝皢鍏惰浆鎹负string鏍煎紡
 	search_result = std::string((char *)ptr, size * nmemb);
 	return size * nmemb;
 }
@@ -185,11 +189,11 @@ void baiduAPI(cv::Mat & image) {
 	string access_token;
 	const string AK = "hZp7PAVeBGdN8YcFpCflVLn4";
 	const string SK = "5mU1lGbsy4pkZOcR8Twz2zwGhWgS9zMj";
-	int tokNum = get_access_token(access_token, AK, SK);//获取token，成功为0，失败为1
+	int tokNum = get_access_token(access_token, AK, SK);//鑾峰彇token锛屾垚鍔熶负0锛屽け璐ヤ负1
 	string res;
 	string status;
 	/*
-	//注册人脸
+	//娉ㄥ唽浜鸿劯
 	int resNum;
 	if (tokNum == 0) {
 	resNum = add(base64Img, res, status,access_token);
@@ -198,7 +202,7 @@ void baiduAPI(cv::Mat & image) {
 	}
 	*/
 
-	//搜索人脸
+	//鎼滅储浜鸿劯
 	string user_id;
 	int score;
 	if (tokNum == 0) {
